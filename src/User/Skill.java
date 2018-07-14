@@ -7,7 +7,9 @@ public class Skill {
     private SkillType type;
     private int years;
 
-    public Skill() {
-        // stub
+    public Skill(String nm, SkillType t, int yrs) {
+        this.name = nm;
+        this.type = t;
+        this.years = yrs;
     }
 }
