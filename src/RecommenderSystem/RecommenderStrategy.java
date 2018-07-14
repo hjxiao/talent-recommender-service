@@ -1,4 +1,11 @@
 package RecommenderSystem;
 
-public class RecommenderStrategy {
+import Business.*;
+import User.User;
+
+public interface RecommenderStrategy {
+    /*
+
+     */
+    int analyzeMatch(Project p, User u);
 }
