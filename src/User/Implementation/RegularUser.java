@@ -5,11 +5,8 @@ import User.User;
 
 public class RegularUser extends User{
 
-    public RegularUser() {
-        // stub
-    }
-
-    public void apply(Project p) {
-        // stub
+    public RegularUser(String nm, int id) {
+        this.name = nm;
+        this.employeeID = id;
     }
 }
