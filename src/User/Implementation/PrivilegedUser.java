@@ -31,4 +31,8 @@ public class PrivilegedUser extends User {
         this.managingProjects.add(p);
         return true;
     }
+
+    private void rateProjectMember(User u, int i) {
+        // todo
+    }
 }

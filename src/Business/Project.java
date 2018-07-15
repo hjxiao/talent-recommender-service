@@ -59,7 +59,8 @@ public class Project {
     }
 
     /*
-    Purpose: Installs user "u" as project owner if no current owner exists
+    Purpose: Installs user "u" as project owner if no current owner exists. This function
+    should not be directly invoked in the client application.
     Params:
         - u : PrivilegedUser - User who wishes to supervise project
     Returns:
@@ -86,6 +87,7 @@ public class Project {
     public boolean registerMember(User u) {
         if (!this.projectMembers.contains(u)) {
             this.projectMembers.add(u);
+            u.acceptProject(this);
             return true;
         }
 

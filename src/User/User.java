@@ -25,6 +25,22 @@ public abstract class User {
         return p.acceptApplicant(this);
     }
 
+    /*
+    Purpose: Adds a project to the user's portfolio. The user should not be able to invoke this
+    function as it is done through the Project class.
+    Params:
+        - p : Project - The project that this user wishes to apply to work on
+    Returns:
+        - a boolean indicating whether the application was received successfully. Successful
+        receipt indicates the user has met all mandatory skill requirements.
+    Throws: -
+     */
+    public void acceptProject(Project p) {
+        if (!workingProjects.contains(p)) {
+            workingProjects.add(p);
+        }
+    }
+
     public boolean possessSkill(Skill s) {
         return this.skills.contains(s);
     }
