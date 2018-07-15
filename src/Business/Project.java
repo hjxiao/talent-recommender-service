@@ -1,5 +1,6 @@
 package Business;
 
+import DataModel.ApplicantComparator;
 import RecommenderSystem.RecommenderStrategy;
 import User.*;
 import User.Implementation.PrivilegedUser;
@@ -16,12 +17,27 @@ public class Project {
 
     private HashSet<Skill> requiredSkills;
     private HashSet<Skill> optionalSkills;
-    private int duration;
-    private Boolean isComplete;
+    private int duration = 0;
+    private int teamSize = 0;
+    private Boolean isComplete = false;
 
-    public Project() {
-        // stub
+    private RecommenderStrategy rs;
+
+    public Project(RecommenderStrategy rs) {
+        this.rs = rs;
     }
+
+    public void setDuration(int i) { this.duration = i; }
+    public int getDuration() { return this.duration; }
+
+    public void setTeamSize(int i) { this.teamSize = i; }
+    public int getTeamSize() { return this.teamSize; }
+
+    public void setisComplete(boolean b) { this.isComplete = b; }
+    public boolean getIsComplete() { return this.isComplete; }
+
+    public void addRequiredSkill(Skill s) { requiredSkills.add(s); }
+    public void addOptionalSkill(Skill s) { optionalSkills.add(s); }
 
     /*
     Purpose: Upon application, the user will be added to the project's pending applicant's list.
@@ -59,13 +75,51 @@ public class Project {
         return false;
     }
 
-    public PriorityQueue<Pair<User, Integer>> reviewApplicants(RecommenderStrategy rs) {
-        // stub
-        return null;
+    /*
+    Purpose: Installs user "u" as new project member
+    Params:
+        - u : User - User who wishes to work on project
+    Returns:
+        - a boolean indicating whether membership in project was conferred
+    Throws: -
+     */
+    public boolean registerMember(User u) {
+        if (!this.projectMembers.contains(u)) {
+            this.projectMembers.add(u);
+            return true;
+        }
+
+        return false;
     }
 
-    public int reviewApplicant(RecommenderStrategy rs) {
-        // stub
-        return 0;
+    /*
+    Purpose: Installs user "u" as project owner if no current owner exists
+    Params:
+        - u : PrivilegedUser - User who wishes to supervise project
+    Returns:
+        - a boolean indicating whether ownership of project was conferred to user
+    Throws: -
+     */
+    public PriorityQueue<Pair<User, Integer>> reviewApplicants() {
+        PriorityQueue<Pair<User, Integer>> ret =
+                new PriorityQueue<Pair<User, Integer>>(this.teamSize, new ApplicantComparator());
+
+        for (User u : pendingApplicants) {
+            int matchScore = reviewApplicant(this, u);
+            Pair<User, Integer> p = new Pair<User, Integer>(u, matchScore);
+            ret.add(p);
+        }
+        return ret;
+    }
+
+    /*
+    Purpose: Installs user "u" as project owner if no current owner exists
+    Params: -
+    Returns:
+        - an integer match score between 0 to 10 indicating applicant strength
+    Throws: -
+     */
+    public int reviewApplicant(Project p, User u) {
+        return rs.analyzeMatch(p, u);
     }
 }
