@@ -8,6 +8,9 @@ Comments regarding the UML class diagram:
 
 Assumptions:
 - Each project has at most one owner
-- Projects do not have a designated maximum personnel capacity
+	- The owner cannot be changed post-assignment
+- Requirements are flexible; users can be assigned to a project without meeting all requirements
+  based on priority
 - Applicants are prioritized by match score
+	- Applicants with the same score are arbitrarily prioritized
 
