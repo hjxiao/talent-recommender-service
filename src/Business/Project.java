@@ -39,6 +39,9 @@ public class Project {
     public void addRequiredSkill(Skill s) { requiredSkills.add(s); }
     public void addOptionalSkill(Skill s) { optionalSkills.add(s); }
 
+    public HashSet<Skill> getRequiredSkill() { return requiredSkills; }
+    public HashSet<Skill> getOptionalSkill() { return optionalSkills; }
+
     /*
     Purpose: Upon application, the user will be added to the project's pending applicant's list.
     Params:
@@ -118,7 +121,7 @@ public class Project {
     Purpose: Installs user "u" as project owner if no current owner exists
     Params: -
     Returns:
-        - an integer match score between 0 to 10 indicating applicant strength
+        - an integer match score greater than or equal to 0
     Throws: -
      */
     public int reviewApplicant(Project p, User u) {
