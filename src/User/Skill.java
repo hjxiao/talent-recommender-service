@@ -14,7 +14,7 @@ public class Skill {
         this.years = yrs;
     }
 
-    public void reeiveEndorsement() {
+    public void receiveEndorsement() {
         endorsements++;
     }
 }

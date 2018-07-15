@@ -12,17 +12,15 @@ public class Company {
     private ArrayList<Project> projects;
     private HashSet<User> employees;
 
-    public Company() {
-        // stub
+    public Company(String nm) {
+        this.name = nm;
+        this.employeeRatings = new HashMap<Project, Pair<User, Integer>>();
     }
 
-    public String getName() {
-        // stub
-        return null;
-    }
+    public String getName() { return name; }
 
-    public String getRatings() {
-        // stub
-        return null;
+    public HashMap<Project, Pair<User, Integer>> getRatings() { return employeeRatings; }
+    public void addRating(Project p, Pair<User, Integer> r) {
+        employeeRatings.put(p, r);
     }
 }

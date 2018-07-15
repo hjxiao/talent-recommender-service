@@ -1,16 +1,23 @@
 package User.Implementation;
 
+import Business.Company;
 import Business.Project;
 import User.*;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PrivilegedUser extends User {
     private ArrayList<Project> managingProjects;
 
-    public PrivilegedUser(String nm, int id) {
+    public PrivilegedUser(String nm, int id, Company c) {
         this.name = nm;
         this.employeeID = id;
+        this.c = c;
+
+        this.workingProjects = new ArrayList<Project>();
+        this.feedback = new HashMap<Project, String>();
     }
 
     /*
@@ -32,7 +39,15 @@ public class PrivilegedUser extends User {
         return true;
     }
 
-    private void rateProjectMember(User u, int i) {
-        // todo
+    public void rateProjectMember(Project p, Pair<User, Integer> rating) {
+        c.addRating(p, rating);
+    }
+
+    public void endorseProjectSkills(Project p, User u) {
+        p.endorse(u);
+    }
+
+    public void provideFeedback(Project p, User u, String feedback) {
+        u.addFeedback(p, feedback);
     }
 }

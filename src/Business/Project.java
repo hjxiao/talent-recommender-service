@@ -124,4 +124,19 @@ public class Project {
     public int reviewApplicant(Project p, User u) {
         return rs.analyzeMatch(p, u);
     }
+
+    /*
+    Purpose: User "u" receives endorsements on all required and optional project skills
+    Params:
+        - u : User - the user who completed project and received the endorsements
+    Returns:
+        - an integer match score between 0 to 10 indicating applicant strength
+    Throws: -
+     */
+    public void endorse(User u) {
+        if (isComplete) {
+            u.receiveEndorsement(requiredSkills);
+            u.receiveEndorsement(optionalSkills);
+        }
+    }
 }
